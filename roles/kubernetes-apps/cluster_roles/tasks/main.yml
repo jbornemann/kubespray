@@ -57,3 +57,25 @@
   when: inventory_hostname == groups['kube-master'][0] and kubesystem.rc != 0
   tags:
     - apps
+
+- name: Get OCI ClusterRole, and ClusterRoleBinding 
+  get_url:
+    url: "https://raw.githubusercontent.com/oracle/oci-cloud-controller-manager/{{oci_cloud_controller_version}}/manifests/oci-cloud-controller-manager-rbac.yaml"
+    dest: "/tmp/oci"
+  register: result
+  until: "'OK' in result.msg"
+  retries: 4
+  delay: "{{ retry_stagger | random + 3 }}"
+  when:
+    - cloud_provider is defined
+    - cloud_provider == 'oci'
+  tags: oci
+
+- name: Apply OCI ClusterRole, and ClusterRoleBinding 
+  kube:
+    kubectl: "{{bin_dir}}/kubectl"
+    filename: "/tmp/oci/oci-cloud-controller-manager-rbac.yaml"
+  when:
+    - cloud_provider is defined
+    - cloud_provider == 'oci'
+  tags: oci

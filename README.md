@@ -5,7 +5,7 @@ Deploy a Production Ready Kubernetes Cluster
 
 If you have questions, join us on the [kubernetes slack](https://kubernetes.slack.com), channel **\#kubespray**.
 
--   Can be deployed on **AWS, GCE, Azure, OpenStack or Baremetal**
+-   Can be deployed on **AWS, GCE, Azure, OpenStack, OCI,  or Baremetal**
 -   **High available** cluster
 -   **Composable** (Choice of the network plugin for instance)
 -   Support most popular **Linux distributions**

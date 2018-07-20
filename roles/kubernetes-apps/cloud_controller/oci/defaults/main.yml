@@ -1,0 +1,4 @@
+---
+
+oci_security_list_management: All
+oci_use_instance_principals: false
